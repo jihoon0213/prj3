@@ -62,4 +62,22 @@ public class BoardService {
         return boardDto;
 
     }
+
+    public void deleteById(Integer id) {
+        boardRepository.deleteById(id);
+    }
+
+    public void update(BoardDto boardDto) {
+        // 조회
+        Board db = boardRepository.findById(boardDto.getId()).get();
+
+        // 변경
+        db.setTitle(boardDto.getTitle());
+        db.setContent(boardDto.getContent());
+        db.setAuthor(boardDto.getAuthor());
+
+        // 저장
+        boardRepository.save(db);
+
+    }
 }

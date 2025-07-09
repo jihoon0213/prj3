@@ -3,6 +3,7 @@ import { MainLayout } from "./common/MainLayout.jsx";
 import { BoardAdd } from "./feature/board/BoardAdd.jsx";
 import { BoardList } from "./feature/board/BoardList.jsx";
 import { BoardDetail } from "./feature/board/BoardDetail.jsx";
+import { BoardEdit } from "./feature/board/BoardEdit.jsx";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route index element={<BoardList />} />
           <Route path="board/add" element={<BoardAdd />} />
           <Route path="board/:id" element={<BoardDetail />} />
+          <Route path="board/edit" element={<BoardEdit />} />
         </Route>
       </Routes>
     </BrowserRouter>
