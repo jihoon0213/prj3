@@ -19,7 +19,6 @@ public class MemberController {
 
     @GetMapping("list")
     public List<MemberListInfo> list() {
-
         return memberService.list();
     }
 

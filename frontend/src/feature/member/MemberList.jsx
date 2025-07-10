@@ -1,9 +1,11 @@
-import { Col, Row, Spinner, Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import { Col, Row, Spinner, Table } from "react-bootstrap";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 export function MemberList() {
   const [memberList, setMemberList] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -38,7 +40,11 @@ export function MemberList() {
             </thead>
             <tbody>
               {memberList.map((member) => (
-                <tr key={member.email}>
+                <tr
+                  key={member.email}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navigate(`/member?email=${member.email}`)}
+                >
                   <td>{member.email}</td>
                   <td>{member.nickName}</td>
                   <td>{member.insertedAt}</td>

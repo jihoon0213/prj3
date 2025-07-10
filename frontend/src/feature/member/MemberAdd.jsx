@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 export function MemberAdd() {
   const [email, setEmail] = useState("");
@@ -19,6 +20,7 @@ export function MemberAdd() {
   const [nickName, setNickName] = useState("");
   const [info, setInfo] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const navigate = useNavigate();
 
   function handleSaveClick() {
     // post /api/member/add, {email, password, nickName, info}
@@ -36,6 +38,7 @@ export function MemberAdd() {
         if (message) {
           toast(message.text, { type: message.type });
         }
+        navigate("/");
       })
       .catch((err) => {
         console.log("bad");

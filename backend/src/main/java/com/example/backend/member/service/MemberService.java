@@ -69,7 +69,6 @@ public class MemberService {
     }
 
     public List<MemberListInfo> list() {
-
         return memberRepository.findAllBy();
     }
 }
