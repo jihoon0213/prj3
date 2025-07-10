@@ -7,6 +7,7 @@ import { BoardEdit } from "./feature/board/BoardEdit.jsx";
 import { MemberAdd } from "./feature/member/MemberAdd.jsx";
 import { MemberList } from "./feature/member/MemberList.jsx";
 import { MemberDetail } from "./feature/member/MemberDetail.jsx";
+import { MemberEdit } from "./feature/member/MemberEdit.jsx";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/signup" element={<MemberAdd />} />
           <Route path="/member/list" element={<MemberList />} />
           <Route path="/member" element={<MemberDetail />} />
+          <Route path="/member/edit" element={<MemberEdit />} />
         </Route>
       </Routes>
     </BrowserRouter>

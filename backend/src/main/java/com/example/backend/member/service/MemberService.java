@@ -53,7 +53,7 @@ public class MemberService {
         }
         // 형식에 맞는 지?
         String email = memberForm.getEmail();
-        if (!Pattern.matches("[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}", email)) {
+        if (!Pattern.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}", email)) {
             throw new RuntimeException("이메일 형식에 맞지 않습니다.");
         }
         // password 있는 지?
@@ -75,13 +75,40 @@ public class MemberService {
 
     public MemberDto get(String email) {
         Member db = memberRepository.findById(email).get();
-        
+
         MemberDto memberDto = new MemberDto();
         memberDto.setNickName(db.getNickName());
         memberDto.setInfo(db.getInfo());
         memberDto.setEmail(db.getEmail());
         memberDto.setInsertedAt(db.getInsertedAt());
 
+
         return memberDto;
+    }
+
+    public void delete(MemberForm memberForm) {
+        Member db = memberRepository.findById(memberForm.getEmail()).get();
+        if (db.getPassword().equals(memberForm.getPassword())) {
+            memberRepository.delete(db);
+        } else {
+            throw new RuntimeException("암호가 일치하지 않습니다.");
+        }
+    }
+
+    public void update(MemberForm memberForm) {
+        // 조회
+        Member db = memberRepository.findById(memberForm.getEmail()).get();
+
+        //암호 확인
+        if (!db.getPassword().equals(memberForm.getPassword())) {
+            throw new RuntimeException("암호가 일치하지 않습니다.");
+        }
+
+        // 변경
+        db.setNickName(memberForm.getNickName());
+        db.setInfo(memberForm.getInfo());
+
+        // 저장
+        memberRepository.save(db);
     }
 }
