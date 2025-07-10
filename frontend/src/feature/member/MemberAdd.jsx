@@ -4,6 +4,7 @@ import {
   FormControl,
   FormGroup,
   FormLabel,
+  FormText,
   Row,
   Spinner,
 } from "react-bootstrap";
@@ -14,6 +15,7 @@ import { toast } from "react-toastify";
 export function MemberAdd() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   const [nickName, setNickName] = useState("");
   const [info, setInfo] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
@@ -48,7 +50,7 @@ export function MemberAdd() {
       });
   }
 
-  //이메일, 암호. 별명 입력하지 않으면 가입버튼 비활성화
+  // 이메일, 암호, 별명 입력하지 않으면 가입버튼 비활성화
   let disabled = false;
   if (email === "") {
     disabled = true;
@@ -58,6 +60,12 @@ export function MemberAdd() {
   }
   if (nickName === "") {
     disabled = true;
+  }
+  // password와 password2가 일치하지 않으면 가입버튼 비활성화
+  let passwordConfirm = true;
+  if (password !== password2) {
+    disabled = true;
+    passwordConfirm = false;
   }
 
   return (
@@ -78,7 +86,7 @@ export function MemberAdd() {
             <FormLabel>암호</FormLabel>
             {/*type은 password인데 보이도록 text로 둠*/}
             <FormControl
-              type="text"
+              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -86,10 +94,18 @@ export function MemberAdd() {
         </div>
         <div>
           <FormGroup className="mb-3" controlId="password2">
-            {/* TODO: 나중에 적용 */}
             <FormLabel>암호 확인</FormLabel>
             {/*type은 password인데 보이도록 text로 둠*/}
-            <FormControl type="text" />
+            <FormControl
+              type="password"
+              value={password2}
+              onChange={(e) => setPassword2(e.target.value)}
+            />
+            {passwordConfirm || (
+              <FormText className="text-danger">
+                패스워드가 일치하지 않습니다.
+              </FormText>
+            )}
           </FormGroup>
         </div>
         <div>
