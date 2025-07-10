@@ -1,14 +1,13 @@
 package com.example.backend.member.controller;
 
 import com.example.backend.member.dto.MemberForm;
+import com.example.backend.member.dto.MemberListInfo;
 import com.example.backend.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -17,6 +16,12 @@ import java.util.Map;
 public class MemberController {
 
     private final MemberService memberService;
+
+    @GetMapping("list")
+    public List<MemberListInfo> list() {
+
+        return memberService.list();
+    }
 
     @PostMapping("add")
     public ResponseEntity<?> add(@RequestBody MemberForm memberForm) {

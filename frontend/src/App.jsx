@@ -5,6 +5,7 @@ import { BoardList } from "./feature/board/BoardList.jsx";
 import { BoardDetail } from "./feature/board/BoardDetail.jsx";
 import { BoardEdit } from "./feature/board/BoardEdit.jsx";
 import { MemberAdd } from "./feature/member/MemberAdd.jsx";
+import { MemberList } from "./feature/member/MemberList.jsx";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="board/:id" element={<BoardDetail />} />
           <Route path="board/edit" element={<BoardEdit />} />
           <Route path="/signup" element={<MemberAdd />} />
+          <Route path="/member/list" element={<MemberList />} />
         </Route>
       </Routes>
     </BrowserRouter>
