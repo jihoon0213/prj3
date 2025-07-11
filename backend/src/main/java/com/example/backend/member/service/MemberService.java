@@ -1,15 +1,16 @@
 package com.example.backend.member.service;
 
-import com.example.backend.member.dto.ChangePasswordForm;
-import com.example.backend.member.dto.MemberDto;
-import com.example.backend.member.dto.MemberForm;
-import com.example.backend.member.dto.MemberListInfo;
+import com.example.backend.member.dto.*;
 import com.example.backend.member.entity.Member;
 import com.example.backend.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.oauth2.jwt.JwtClaimsSet;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -20,6 +21,7 @@ import java.util.regex.Pattern;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final JwtEncoder jwtEncoder;
 
     public void add(MemberForm memberForm) {
 
@@ -121,5 +123,27 @@ public class MemberService {
         } else {
             throw new RuntimeException("이전 패스워드가 일치하지 않습니다.");
         }
+    }
+
+    public String getToken(MemberLoginForm loginForm) {
+        // 해당 email의 데이터 있는 지
+        Optional<Member> db = memberRepository.findById(loginForm.getEmail());
+        if (db.isPresent()) {
+            // 있으면 패스워드 맞는지
+            if (db.get().getPassword().equals(loginForm.getPassword())) {
+                // token 만들어서 리턴
+                JwtClaimsSet claims = JwtClaimsSet.builder()
+                        .subject(loginForm.getEmail())
+                        .issuer("self")
+                        .issuedAt(Instant.now())
+                        .expiresAt(Instant.now().plusSeconds(60 * 60 * 24 * 365))
+                        .build();
+
+                return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+            }
+
+        }
+
+        throw new RuntimeException("이메일 또는 패스워드가 일치하지 않습니다.");
     }
 }
