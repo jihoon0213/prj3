@@ -8,15 +8,19 @@ import {
   Row,
   Spinner,
 } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "react-toastify";
+import { AuthenticationContext } from "../../common/AuthenticationContextProvider.jsx";
 
 export function MemberDetail() {
   const [member, setMember] = useState(null);
   const [modalShow, setModalShow] = useState(false);
   const [password, setPassword] = useState("");
+
+  const { logout, hasAccess } = useContext(AuthenticationContext);
+
   const [params] = useSearchParams();
 
   const navigate = useNavigate();
@@ -45,6 +49,7 @@ export function MemberDetail() {
         const message = res.data.message;
         toast(message.text, { type: message.type });
         navigate("/");
+        logout();
       })
       .catch((err) => {
         console.log("bad");
@@ -94,22 +99,24 @@ export function MemberDetail() {
             />
           </FormGroup>
         </div>
-        <div>
-          <Button
-            variant="outline-danger"
-            size="sm"
-            className="me-2"
-            onClick={() => setModalShow(true)}
-          >
-            회원 탈퇴
-          </Button>
-          <Button
-            variant="outline-info"
-            onClick={() => navigate(`/member/edit?email=${member.email}`)}
-          >
-            수정
-          </Button>
-        </div>
+        {hasAccess(member.email) && (
+          <div>
+            <Button
+              variant="outline-danger"
+              size="sm"
+              className="me-2"
+              onClick={() => setModalShow(true)}
+            >
+              회원 탈퇴
+            </Button>
+            <Button
+              variant="outline-info"
+              onClick={() => navigate(`/member/edit?email=${member.email}`)}
+            >
+              수정
+            </Button>
+          </div>
+        )}
       </Col>
 
       {/*   삭제 확인 모달 */}

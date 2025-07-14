@@ -1,5 +1,6 @@
 package com.example.backend.board.entity;
 
+import com.example.backend.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +19,10 @@ public class Board {
 
     private String title;
     private String content;
-    private String author;
+
+    @ManyToOne
+    @JoinColumn(name = "author")
+    private Member author;
 
     @Column(updatable = false, insertable = false)
     private LocalDateTime insertedAt;
