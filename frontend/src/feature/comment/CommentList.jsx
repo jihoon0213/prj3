@@ -3,25 +3,7 @@ import axios from "axios";
 import { Spinner } from "react-bootstrap";
 import { CommentItem } from "./CommentItem.jsx";
 
-export function CommentList({ boardId, isProcessing, setIsProcessing }) {
-  const [commentList, setCommentList] = useState(null);
-
-  useEffect(() => {
-    if (!isProcessing) {
-      axios
-        .get(`/api/comment/board/${boardId}`)
-        .then((res) => {
-          setCommentList(res.data);
-        })
-        .catch((err) => {})
-        .finally(() => {});
-    }
-  }, [isProcessing]);
-
-  if (commentList === null) {
-    return <Spinner />;
-  }
-
+export function CommentList({ commentList, isProcessing, setIsProcessing }) {
   return (
     <div>
       {commentList.map((comment) => (
