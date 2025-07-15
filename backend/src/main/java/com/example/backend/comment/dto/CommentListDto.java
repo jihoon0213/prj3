@@ -14,6 +14,7 @@ import java.time.ZoneId;
 public class CommentListDto {
     private Integer id;
     private Integer boardId;
+    private String authorEmail;
     private String authorNickName;
     private String comment;
     private LocalDateTime insertedAt;
