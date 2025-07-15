@@ -36,7 +36,7 @@ export function CommentAdd({ boardId, isProcessing, setIsProcessing }) {
   }
 
   return (
-    <div>
+    <div className="position-relative">
       <FloatingLabel
         controlId="commentTextarea1"
         label={
@@ -58,13 +58,15 @@ export function CommentAdd({ boardId, isProcessing, setIsProcessing }) {
           onChange={(e) => setComment(e.target.value)}
         />
       </FloatingLabel>
-      <Button
-        disabled={isProcessing || saveButtonDisabled}
-        onClick={handleCommentSaveClick}
-      >
-        {isProcessing && <Spinner size="sm" />}
-        댓글 저장
-      </Button>
+      <div className="position-absolute bottom-0 end-0 m-3">
+        <Button
+          disabled={isProcessing || saveButtonDisabled}
+          onClick={handleCommentSaveClick}
+        >
+          {isProcessing && <Spinner size="sm" />}
+          댓글 저장
+        </Button>
+      </div>
     </div>
   );
 }
