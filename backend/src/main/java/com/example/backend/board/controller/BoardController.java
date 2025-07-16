@@ -1,5 +1,6 @@
 package com.example.backend.board.controller;
 
+import com.example.backend.board.dto.BoardAddForm;
 import com.example.backend.board.dto.BoardDto;
 import com.example.backend.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -61,10 +62,10 @@ public class BoardController {
 
     @PostMapping("add")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<?> add(@RequestBody BoardDto dto,
+    public ResponseEntity<?> add(BoardAddForm dto,
                                  Authentication authentication) {
         // 값들이 유효한지 확인
-        boolean result = boardService.validate(dto);
+        boolean result = boardService.validateForAdd(dto);
 
         if (result) {
             // service에게 넘겨서 일 시키기
