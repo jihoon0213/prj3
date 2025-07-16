@@ -11,5 +11,5 @@ public interface BoardFileRepository extends JpaRepository<BoardFile, BoardFileI
     List<BoardFile> findByBoardId(Integer id);
 
 
-    void deleteByBoard(Board db);
+    void deleteByBoard(Board board);
 }
