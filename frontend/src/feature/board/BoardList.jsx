@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router";
 import { FaRegComments } from "react-icons/fa6";
 import { GoHeartFill } from "react-icons/go";
+import { FaRegImages } from "react-icons/fa";
 
 export function BoardList() {
   const [boardList, setBoardList] = useState(null);
@@ -91,12 +92,26 @@ export function BoardList() {
                     <td>
                       <div className="d-flex gap-2">
                         <span>{board.title}</span>
+
+                        {/*댓글 갯수*/}
                         <span>
                           {board.countComment > 0 && (
                             <Badge bg="light" text="dark">
                               <div className="d-flex gap-1">
                                 <FaRegComments />
                                 <span>{board.countComment}</span>
+                              </div>
+                            </Badge>
+                          )}
+                        </span>
+
+                        {/*  파일 갯수*/}
+                        <span>
+                          {board.countFile > 0 && (
+                            <Badge bg="info">
+                              <div className="d-flex gap-1">
+                                <FaRegImages />
+                                <span>{board.countFile}</span>
                               </div>
                             </Badge>
                           )}
