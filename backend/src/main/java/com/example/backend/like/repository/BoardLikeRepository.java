@@ -1,5 +1,6 @@
 package com.example.backend.like.repository;
 
+import com.example.backend.board.entity.Board;
 import com.example.backend.like.entity.BoardLike;
 import com.example.backend.like.entity.BoardLikeId;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,4 +12,6 @@ public interface BoardLikeRepository extends JpaRepository<BoardLike, BoardLikeI
 
 
     Long countByBoardId(Integer boardId);
+
+    void deleteByBoard(Board db);
 }

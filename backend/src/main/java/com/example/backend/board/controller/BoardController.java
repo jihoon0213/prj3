@@ -2,6 +2,7 @@ package com.example.backend.board.controller;
 
 import com.example.backend.board.dto.BoardAddForm;
 import com.example.backend.board.dto.BoardDto;
+import com.example.backend.board.dto.BoardUpdateForm;
 import com.example.backend.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.Map;
 
 //@Controller
@@ -23,9 +25,10 @@ public class BoardController {
     @PutMapping("{id}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<?> updateBoard(@PathVariable Integer id,
-                                         @RequestBody BoardDto boardDto,
+                                         BoardUpdateForm boardDto,
                                          Authentication authentication) {
-        boolean result = boardService.validate(boardDto);
+
+        boolean result = boardService.validateForUpdate(boardDto);
         if (result) {
             boardService.update(boardDto, authentication);
 
