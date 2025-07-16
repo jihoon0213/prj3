@@ -96,8 +96,8 @@ export function BoardDetail() {
           {/*  파일 목록 보기*/}
           <ListGroup>
             {board.files.map((file) => (
-              <ListGroupItem key={file}>
-                <Image src={file} />
+              <ListGroupItem key={file.name}>
+                <Image src={file.path} />
               </ListGroupItem>
             ))}
           </ListGroup>

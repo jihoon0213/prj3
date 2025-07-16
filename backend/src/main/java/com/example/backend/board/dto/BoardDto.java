@@ -18,7 +18,7 @@ public class BoardDto {
     private String authorNickName;
     private LocalDateTime insertedAt;
 
-    private List<String> files;
+    private List<BoardFileDto> files;
 
     public BoardDto(Integer id,
                     String title,
