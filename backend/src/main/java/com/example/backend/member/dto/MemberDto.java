@@ -11,5 +11,4 @@ public class MemberDto {
     private String info;
     private LocalDateTime insertedAt;
 
-
 }

@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Spinner } from "react-bootstrap";
 import { CommentItem } from "./CommentItem.jsx";
 
 export function CommentList({ commentList, isProcessing, setIsProcessing }) {

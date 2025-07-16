@@ -110,16 +110,17 @@ public class MemberService {
             commentRepository.deleteByAuthor(db);
 
             // 회원이 쓴 게시물에 달린 댓글 지우기
-            // / 회원이 쓴 게시물 얻고
+            /// 회원이 쓴 게시물 얻고
             List<Board> byAuthor = boardRepository.findByAuthor(db);
-            // / 그 게시물로 댓글 지우기
+            /// 그 게시물로 댓글 지우기
             for (Board board : byAuthor) {
                 commentRepository.deleteByBoard(board);
             }
-            boardLikeRepository.deleteByMember(db);
 
             // 회원이 쓴 게시물 지우기
             boardRepository.deleteByAuthor(db);
+            // 좋아요 지우기
+            boardLikeRepository.deleteByMember(db);
             // 회원 정보 지우기
             memberRepository.delete(db);
         } else {

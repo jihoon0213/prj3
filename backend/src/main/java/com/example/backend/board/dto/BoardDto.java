@@ -26,7 +26,6 @@ public class BoardDto {
                     String authorEmail,
                     String authorNickName,
                     LocalDateTime insertedAt) {
-
         this.id = id;
         this.title = title;
         this.content = content;

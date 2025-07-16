@@ -93,7 +93,7 @@ export function BoardDetail() {
           </FormGroup>
         </div>
         <div className="mb-3">
-          {/*  파일 목록 보기*/}
+          {/*   파일 목록 보기   */}
           <ListGroup>
             {board.files.map((file) => (
               <ListGroupItem key={file.name}>

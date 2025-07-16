@@ -1,4 +1,3 @@
-
 package com.example.backend.member.repository;
 
 import com.example.backend.member.entity.Auth;
