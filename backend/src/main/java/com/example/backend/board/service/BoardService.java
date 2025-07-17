@@ -24,7 +24,10 @@ import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +52,7 @@ public class BoardService {
     private void deleteFile(String objectKey) {
         DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest
                 .builder()
+                .bucket(bucketName)
                 .key(objectKey)
                 .build();
 
@@ -67,7 +71,8 @@ public class BoardService {
             s3Client
                     .putObject(putObjectRequest,
                             RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
-        } catch (IOException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("파일 전송이 실패하였습니다.");
         }
@@ -110,10 +115,10 @@ public class BoardService {
                     // repository로 저장
                     boardFileRepository.save(boardFile);
 
-                    // 실제 파일 aws s3에 저장
+                    // 실제 파일 aws s3 에 저장
                     String objectKey = "prj3/board/" + board.getId() + "/" + file.getOriginalFilename();
                     uploadFile(file, objectKey);
-                    
+
                 }
             }
         }
@@ -186,9 +191,9 @@ public class BoardService {
             // 좋아요
             boardLikeRepository.deleteByBoard(db);
             // 디스크의 파일
-            // / 1.파일 목록 얻고
+            /// 1.파일 목록 얻고
             List<String> fileNames = boardFileRepository.listFileNameByBoard(db);
-            // / 2.파일 지우기
+            /// 2.파일 지우기
             for (String fileName : fileNames) {
                 File f = new File("C:/Temp/prj3/boardFile/" + db.getId() + "/" + fileName);
                 if (f.exists()) {
