@@ -33,7 +33,7 @@ CREATE TABLE auth
 );
 INSERT INTO auth
     (member_email, auth_name)
-VALUES ('trump@abc.com', 'admin');
+VALUES ('admin@admin.com', 'admin');
 SELECT *
 FROM auth;
 
