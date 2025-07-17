@@ -121,9 +121,9 @@ public class MemberService {
             }
 
             // 회원이 쓴 게시물 지우기
-            /// 1. 회원이 쓴 게시물 번호 목록을 얻고
+            // / 1. 회원이 쓴 게시물 번호 목록을 얻고
             List<Integer> boardIdList = boardRepository.listBoardIdByAuthor(db);
-            /// 2. 번호 목록을 탐색해서 boardService의 deleteById의 메소드 호출
+            // / 2. 번호 목록을 탐색해서 boardService의 deleteById의 메소드 호출
             for (Integer boardId : boardIdList) {
                 boardService.deleteById(boardId, authentication);
             }

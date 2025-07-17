@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "react-toastify";
+import { TfiTrash } from "react-icons/tfi";
 
 export function BoardEdit() {
   const [board, setBoard] = useState(null);
@@ -115,23 +116,45 @@ export function BoardEdit() {
         <div className="mb-3">
           {/*   이미 저장된 파일 목록 보기   */}
           <ListGroup>
-            {board.files.map((file) => (
+            {board.files.map((file, index) => (
               <ListGroupItem key={file.name}>
                 <Stack direction="horizontal" gap={3}>
-                  <FormCheck
-                    type="switch"
-                    value={file.name}
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        setDeleteFiles([...deleteFiles, e.target.value]);
-                      } else {
-                        setDeleteFiles(
-                          deleteFiles.filter((item) => item !== e.target.value),
-                        );
-                      }
-                    }}
-                  />
-                  <Image fluid src={file.path} />
+                  <div>
+                    <input
+                      type="checkbox"
+                      className="btn-check"
+                      id={"btn-check-" + index}
+                      value={file.name}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setDeleteFiles([...deleteFiles, e.target.value]);
+                        } else {
+                          setDeleteFiles(
+                            deleteFiles.filter(
+                              (item) => item !== e.target.value,
+                            ),
+                          );
+                        }
+                      }}
+                    />
+                    <label
+                      className="btn btn-outline-danger btn-sm"
+                      htmlFor={"btn-check-" + index}
+                    >
+                      <TfiTrash />
+                    </label>
+                  </div>
+                  <div>
+                    <Image
+                      style={{
+                        filter: deleteFiles.includes(file.name)
+                          ? "blur(3px)"
+                          : "none",
+                      }}
+                      fluid
+                      src={file.path}
+                    />
+                  </div>
                 </Stack>
               </ListGroupItem>
             ))}

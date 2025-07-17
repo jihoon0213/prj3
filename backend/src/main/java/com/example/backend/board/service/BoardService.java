@@ -179,9 +179,9 @@ public class BoardService {
             // 좋아요
             boardLikeRepository.deleteByBoard(db);
             // 디스크의 파일
-            /// 1.파일 목록 얻고
+            // / 1.파일 목록 얻고
             List<String> fileNames = boardFileRepository.listFileNameByBoard(db);
-            /// 2.파일 지우기
+            // / 2.파일 지우기
             for (String fileName : fileNames) {
                 File f = new File("C:/Temp/prj3/boardFile/" + db.getId() + "/" + fileName);
                 if (f.exists()) {
