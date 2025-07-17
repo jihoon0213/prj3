@@ -53,6 +53,7 @@ public class AppConfiguration {
                 .build();
 
         return s3Client;
+
     }
 
     @Bean
