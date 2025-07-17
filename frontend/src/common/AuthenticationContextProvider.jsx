@@ -40,6 +40,7 @@ export function AuthenticationContextProvider({ children }) {
         setUser({
           email: res.data.email,
           nickName: res.data.nickName,
+          scope: payload.scp.split(" "),
         });
       });
     }
