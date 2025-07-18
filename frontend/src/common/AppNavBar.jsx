@@ -39,7 +39,7 @@ export function AppNavBar() {
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
           <Navbar.Brand to="/" as={Link}>
-            PRJ3
+            프로젝트
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

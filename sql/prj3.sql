@@ -88,3 +88,18 @@ CREATE TABLE board_file
     PRIMARY KEY (board_id, name),
     FOREIGN KEY (board_id) REFERENCES board (id)
 );
+
+DELETE
+FROM board
+WHERE id = 1;
+
+SELECT *
+FROM member;
+
+UPDATE member
+SET password = '$2a$12$G8bbavfdxDMrrbuqMUTYVe9IlkgyqfVhKW5T9zk03d1US8e1jPlpm'
+WHERE email = 'jjvug@naver.com';
+
+DELETE
+FROM member
+WHERE email = 'jjvug@naver.com'
